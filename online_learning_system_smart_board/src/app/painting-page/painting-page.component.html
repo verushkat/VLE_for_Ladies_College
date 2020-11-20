@@ -1,0 +1,41 @@
+<div class="canvas-container">
+    <app-canvas
+            [getBlob]="isFinished" (onSuccess)="handleDrawingUpload($event)"
+    [color]="drawColor"></app-canvas>
+</div>
+
+<div class="publish_btn_container">
+<!--    <ngx-float-button icon="save" class="save-btn" (click)="handlePublishClick()">-->
+<!--    </ngx-float-button>-->
+    <ngx-float-button icon="list">
+        <ngx-float-item-button icon="save" content="Submit Drawing" (click)="handlePublishClick()"></ngx-float-item-button>
+        <ngx-float-item-button icon="mode_edit" content="Select Red" color="#eb4034" (click)="handleRedClick()"></ngx-float-item-button>
+        <ngx-float-item-button icon="mode_edit" content="Select Green" color="#2ef007" (click)="handleGreenClick()"></ngx-float-item-button>
+        <ngx-float-item-button icon="mode_edit" content="Select Blue" color="#007bff" (click)="handleBlueClick()"></ngx-float-item-button>
+        <ngx-float-item-button icon="mode_edit" content="Select Black" color="#000000" (click)="handleBlackClick()"></ngx-float-item-button>
+    </ngx-float-button>
+</div>
+
+<swal
+    #doneSwal
+    title="Done."
+    text="Thank you!. Your assignment is submitted."
+    icon="success"
+    [showCancelButton]="false"
+    timer="2000"
+    [showConfirmButton]="false"
+    [timerProgressBar]="true"
+    (close)="navigateToHome()">
+</swal>
+
+<swal
+    #suspend
+    title="Suspended."
+    text="Teacher suspended your assigment."
+    icon="error"
+    [showCancelButton]="false"
+    timer="2000"
+    [showConfirmButton]="false"
+    [timerProgressBar]="true"
+    (close)="navigateToPairMode()">
+</swal>

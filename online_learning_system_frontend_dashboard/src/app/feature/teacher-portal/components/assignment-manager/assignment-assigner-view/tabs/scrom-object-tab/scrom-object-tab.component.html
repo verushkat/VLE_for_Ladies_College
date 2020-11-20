@@ -1,0 +1,38 @@
+<div class="row">
+    <form [formGroup]="scromObjectForm">
+        <div class="col-lg-12">
+            <nb-card [nbSpinner]="isLoading" nbSpinnerStatus="primary">
+                <nb-card-header>Share Scrom Object</nb-card-header>
+                <nb-card-body>
+                    <nb-card-body>
+                        <div class="form-group">
+                            <label for="url" class="label">Url<span class="required">*</span>
+                                <button [disabled]="isInvalidControl('url') || !scromObjectForm.get('url').value"
+                                        class="preview-button" type="primary" nbButton size="tiny"
+                                        status="info" (click)="onPreviewClick()">Preview
+                                </button>
+                            </label>
+                            <input id="url" type="text" formControlName="url" nbInput
+                                   fullWidth
+                                   placeholder="Paste url Here"
+                                   [class.status-danger]="isInvalidControl('url')">
+                        </div>
+                        <button [disabled]="!isValidForm()"
+                                type="button" nbButton
+                                status="success"
+                                (click)="onSubmitClick()"
+                                [nbSpinner]="isLoading"
+                                nbSpinnerStatus="primary"
+                                nbSpinnerSize="tiny"
+                                nbSpinnerMessage="">Share
+                        </button>
+                        <button type="submit" nbButton
+                                status="danger" (click)="onCancelClick()">Cancel
+                        </button>
+                    </nb-card-body>
+                </nb-card-body>
+            </nb-card>
+        </div>
+    </form>
+</div>
+

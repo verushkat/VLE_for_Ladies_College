@@ -1,0 +1,8 @@
+/**
+ * Filter expression callback model.
+ * @param item Data item.
+ * @param field Filter field property name.
+ * @param filterValue Filter value.
+ * @return Include item if true, else remove.
+ */
+export declare type DataTableFilterExpressionCallback = (item: any, field: string, filterValue: any) => boolean;

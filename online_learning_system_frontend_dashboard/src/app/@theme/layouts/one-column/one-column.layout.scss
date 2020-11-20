@@ -1,0 +1,20 @@
+@import '../../styles/themes';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+
+@include nb-install-component() {
+  .menu-sidebar ::ng-deep .scrollable {
+    padding-top: nb-theme(layout-padding-top);
+  }
+
+  .menu-sidebar {
+    background-color: lightyellow;
+    //border-right: 1px solid #d6d6d6;
+    z-index: 0;
+    box-shadow: 0 0.5rem 1rem 0 #8b8b8b;
+  }
+
+  nb-layout-column {
+    background-color: lightyellow;
+  }
+}

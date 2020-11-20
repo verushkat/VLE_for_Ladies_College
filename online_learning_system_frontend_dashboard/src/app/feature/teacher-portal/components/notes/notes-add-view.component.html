@@ -1,0 +1,131 @@
+<div class="row">
+    <div class="col-lg-12">
+        <nb-card>
+            <nb-card-header>Study Materials</nb-card-header>
+            <nb-card-body>
+                <ng-data-table
+                        [id]="'asmnt_list'"
+                        [title]="'Materials'"
+                        [dataSource]="dataSource"
+                        [showHeader]="true"
+                        [pageable]="true"
+                        [showRefreshButton]="true"
+                        [showColumnSelector]="true"
+                        (init)="onInit($event)">
+                    <ng-data-table-column
+                            [field]="'noteName'"
+                            [title]="'Note Name'"
+                            [filterable]="true"
+                            [width]="130"
+                            [showInColumnSelector]="false">
+                    </ng-data-table-column>
+                    <ng-data-table-column
+                            [field]="'subject'"
+                            [title]="'Subject'"
+                            [filterable]="true"
+                            [showDropdownFilter]="true"
+                            [dropdownFilterMenuWidth]="120"
+                            [width]="130"
+                            [showInColumnSelector]="false">
+                    </ng-data-table-column>
+                    <ng-data-table-column
+                            [field]="'grade'"
+                            [title]="'Grade'"
+                            [filterable]="true"
+                            [width]="130"
+                            [showInColumnSelector]="false">
+                    </ng-data-table-column>
+                    <ng-data-table-column
+                            [field]="'type'"
+                            [title]="'Material Type'"
+                            [filterable]="true"
+                            [showDropdownFilter]="true"
+                            [dropdownFilterMenuWidth]="120"
+                            [width]="130"
+                            [showInColumnSelector]="false">
+                    </ng-data-table-column>
+                    <ng-data-table-column
+                            [field]="'submittedDate'"
+                            [title]="'Published date'"
+                            [filterable]="true"
+                            [width]="130"
+                            [showInColumnSelector]="true">
+                    </ng-data-table-column>
+                    <ng-data-table-column
+                            [field]="'noteURL'"
+                            [title]="'Link'"
+                            [width]="130"
+                            [showInColumnSelector]="true">
+                        <ng-template #ngDataTableCell let-row="row" let-spanIndex="spanIndex">
+                            <td>
+                                <a [href]="row.item.noteURL" target="_blank">Download</a>
+                            </td>
+                        </ng-template>
+                    </ng-data-table-column>
+                    <ng-data-table-column [width]="100">
+                        <ng-template #ngDataTableCell let-row="row" let-spanIndex="spanIndex" let-rowSpan="rowSpan">
+                            <td *ngIf="spanIndex === 0" [attr.rowspan]="rowSpan" (click)="$event.stopPropagation()">
+                                <nb-actions size="tiny">
+                                    <nb-action icon="trash-2-outline"
+                                               (click)="onMaterialDelete(row.item)"></nb-action>
+                                </nb-actions>
+                            </td>
+                        </ng-template>
+                    </ng-data-table-column>
+                </ng-data-table>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <form [formGroup]="uploadForm">
+            <nb-card>
+                <nb-card-header>Publish a Material</nb-card-header>
+                <nb-card-body>
+                    <div class="form-group">
+                        <label for="noteName" class="label">Note Name</label><span class="required">*</span>
+                        <input id="noteName" type="text" [formControlName]="'noteName'" nbInput fullWidth
+                               placeholder="Input Here">
+                    </div>
+                    <div class="form-group">
+                        <label for="grade" class="label">Grade</label><span class="required">*</span>
+                        <input id="grade" type="text" [formControlName]="'grade'" nbInput fullWidth
+                               placeholder="Input Here">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject" class="label">Subject</label><span class="required">*</span>
+                        <input id="subject" type="text" [formControlName]="'subject'" nbInput fullWidth
+                               placeholder="Input Here">
+                    </div>
+                    <div class="form-group">
+                        <div><label class="label">Material Type</label><span class="required">*</span></div>
+                        <nb-select [(selected)]="selectedMaterialType" status="primary">
+                            <nb-option *ngFor="let assignment of materialTypes"
+                                       [value]="assignment.value"> {{ assignment.name }}</nb-option>
+                        </nb-select>
+                    </div>
+                    <div>
+                        <label class="upload-label">Upload below
+                            <button class="view-material-button" [disabled]="!isFileUploaded" nbButton status="info" size="tiny"
+                                    (click)="viewReport()">
+                                View Material
+                            </button>
+                        </label>
+                        <ngx-file-uploader
+                                class="file-uploader"
+                                dirPath="notes"
+                                (fileUploadSuccessCallback)="handleUploadSuccess($event)"
+                        ></ngx-file-uploader>
+                    </div>
+
+                    <button [disabled]="!isValidForm()" nbButton status="primary" size="medium"
+                            (click)="submitAssignment()">
+                        Upload
+                    </button>
+                </nb-card-body>
+            </nb-card>
+        </form>
+    </div>
+</div>

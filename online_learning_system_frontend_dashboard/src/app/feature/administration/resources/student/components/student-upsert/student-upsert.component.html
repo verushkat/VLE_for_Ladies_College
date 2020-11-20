@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col-lg-12">
+        <form [formGroup]="studentForm">
+            <nb-card>
+                <nb-card-header *ngIf="!isEdit">Add New Student</nb-card-header>
+                <nb-card-header *ngIf="isEdit">Edit Student Details</nb-card-header>
+                <nb-card-body>
+                    <h5>Student Details</h5>
+                    <div class="form-group">
+                        <label for="studentName" class="label">Student Name</label><span class="required">*</span>
+                        <input id="studentName" type="text" [formControlName]="'studentName'" nbInput fullWidth
+                               placeholder="Input Here" [class.status-danger]="isInvalidControl('studentName')">
+                    </div>
+                    <div class="form-group">
+                        <label class="container">Male
+                            <input type="radio" [formControlName]="'gender'" checked="checked" [value]="'Male'"
+                                   name="gender">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="container">Female
+                            <input type="radio" [formControlName]="'gender'" checked="checked" [value]="'Female'"
+                                   name="gender">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="stdEmail" class="label">Email address</label><span class="required">*</span>
+                        <input type="stdEmail" nbInput fullWidth [formControlName]="'stdEmail'" id="stdEmail"
+                               [email]="true"
+                               placeholder="Input Here" [class.status-danger]="isInvalidControl('stdEmail')">
+                    </div>
+                    <div class="form-group">
+                        <label for="grade" class="label">Grade</label><span class="required">*</span>
+                        <input type="text" nbInput fullWidth id="grade" [formControlName]="'grade'"
+                               placeholder="Input Here" [class.status-danger]="isInvalidControl('grade')">
+                    </div>
+                    <h5>Parent Details</h5>
+                    <div class="form-group">
+                        <label for="parentName" class="label">Parent Name</label><span class="required">*</span>
+                        <input id="parentName" type="text" [formControlName]="'parentName'" nbInput fullWidth
+                               placeholder="Input Here">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="label">Phone Number</label><span class="required">* </span>
+                        <span class="validation-error" [hidden]="!isInvalidDigitCount('phone')"> Phone number must contain 10 digits</span>
+                        <input type="text" nbInput fullWidth id="phone" [formControlName]="'phone'"
+                               placeholder="Input Here" [class.status-danger]="isInvalidControl('phone')">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="label">Email address</label><span class="required">*</span>
+                        <input type="email" nbInput fullWidth [formControlName]="'email'" id="email" [email]="true"
+                               placeholder="Input Here" [class.status-danger]="isInvalidControl('email')">
+                    </div>
+                    <button [disabled]="!studentForm.valid" type="submit" nbButton status="success"
+                            (click)="onSubmit()">Submit
+                    </button>
+                    <button nbButton status="danger" (click)="redirectToStudentsPage()">Cancel</button>
+                </nb-card-body>
+            </nb-card>
+        </form>
+    </div>
+</div>

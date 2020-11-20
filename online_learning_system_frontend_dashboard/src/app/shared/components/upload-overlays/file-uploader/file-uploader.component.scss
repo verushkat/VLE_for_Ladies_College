@@ -1,0 +1,35 @@
+.photo-uploader-outer-container{
+  display: block;
+
+}
+
+.uploader-viewer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.uploader-img-container{
+  width: 3vw;
+  height: 3vw;
+}
+
+.active{
+  display: flex;
+}
+
+.deactive{
+  display: none;
+}
+
+.upload-img-preview{
+  max-width: 3vw;
+  max-height: 3vw;
+}
+
+
+.loadingImage{
+  max-width: 5vw;
+  max-height: 5vw;
+}

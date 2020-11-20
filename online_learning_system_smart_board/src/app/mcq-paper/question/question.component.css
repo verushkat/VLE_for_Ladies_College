@@ -1,0 +1,15 @@
+.answer-inner-container{
+    margin: 1rem 1rem 1rem 0;
+    font-size: 2rem;
+}
+
+.question-container{
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+}
+
+.question-title-container{
+    font-size: 3rem;
+}

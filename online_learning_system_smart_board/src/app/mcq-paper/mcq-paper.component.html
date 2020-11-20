@@ -1,0 +1,41 @@
+<div class="info-container">
+    <div class="info-inner-container">
+        Question - {{currentQuestion}}/{{totalQuestion}}
+    </div>
+</div>
+<div class="mcq-container">
+    <app-question
+            [question]="questionVal"
+            [answer1]="answer1Val"
+            [answer2]="answer2Val"
+            [answer3]="answer3Val"
+            [answer4]="answer4Val"
+            [correctAnswer]="correctAnswer"
+            (result)="handleResult($event)"
+    ></app-question>
+</div>
+
+<swal
+    #doneSwal
+    title="Done."
+    text="Thank you!. Your assignment is submitted."
+    icon="success"
+    [showCancelButton]="false"
+    timer="2000"
+    [showConfirmButton]="false"
+    [timerProgressBar]="true"
+    (close)="navigateToHome()">
+</swal>
+
+<swal
+    #suspend
+    title="Suspended."
+    text="Teacher suspended your assigment."
+    icon="error"
+    [showCancelButton]="false"
+    timer="2000"
+    [showConfirmButton]="false"
+    [timerProgressBar]="true"
+    (close)="navigateToPairMode()">
+</swal>
+

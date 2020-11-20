@@ -1,0 +1,26 @@
+<h6>Question {{number}}</h6>
+<span>{{question.description}}</span>
+<nb-alert status="info" *ngIf="question.answer1">
+    <strong></strong> {{question.answer1}}
+</nb-alert>
+<nb-alert status="info" *ngIf="question.answer2">
+    <strong></strong> {{question.answer2}}
+</nb-alert>
+<nb-alert status="info" *ngIf="question.answer3">
+    <strong></strong> {{question.answer3}}
+</nb-alert>
+<nb-alert status="info" *ngIf="question.answer4">
+    <strong></strong> {{question.answer4}}
+</nb-alert>
+<ng-container *ngIf="question.correctAnswer">
+    <span>Correct answer</span>
+    <nb-alert status="success">
+        <strong></strong> {{question.correctAnswer}}
+    </nb-alert>
+</ng-container>
+<ng-container *ngIf="question.givenAnswer">
+    <span>Given answer</span>
+    <nb-alert [status]="checkAnswer(question)">
+        <strong></strong> {{question.givenAnswer}}
+    </nb-alert>
+</ng-container>

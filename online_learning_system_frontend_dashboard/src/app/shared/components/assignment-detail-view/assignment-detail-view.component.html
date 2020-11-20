@@ -1,0 +1,12 @@
+<div class="col-md-12 col-lg-6 col-xxxl-6">
+    <nb-card class="own-scroll">
+        <nb-card-header>{{dataRow.item.name}}</nb-card-header>
+        <nb-list
+                nbInfiniteList
+                [threshold]="500">
+            <nb-list-item *ngFor="let question of dataRow.item.questions">
+                <app-question-view [question]="question" [number]="dataRow.index"></app-question-view>
+            </nb-list-item>
+        </nb-list>
+    </nb-card>
+</div>

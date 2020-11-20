@@ -1,0 +1,67 @@
+<div class="col-12">
+    <nb-card>
+        <nb-card-header [hidden]="!!currentSessionId">Let's connect</nb-card-header>
+        <nb-card-header [hidden]="!currentSessionId">Select material that you want to assign</nb-card-header>
+        <nb-card-body>
+            <form [formGroup]="addAssignmentFormGroup">
+                <div class="row col-lg-12">
+                    <div [hidden]="!!currentSessionId">
+                        <div class="form-group">
+                            <input id="sessionId" type="text" nbInput
+                                   [fieldSize]="'small'"
+                                   [formControlName]="'sessionId'"
+                                   placeholder="Session ID"
+                                   [class.status-danger]="isInvalidControl('sessionId')">
+                        </div>
+                        <button [disabled]="!isSessionIdNotExists()" nbButton status="primary" size="medium"
+                                [nbSpinner]="isLoading" nbSpinnerStatus="primary" (click)="onConnect()"
+                                nbSpinnerSize="tiny"
+                                nbSpinnerMessage="">
+                            Connect
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <nb-tabset [hidden]="!currentSessionId" (changeTab)="onTabChange($event)" fullWidth>
+                <nb-tab [tabId]="'mcq'" tabTitle="MCQ" [nbSpinner]="tabLoading" nbSpinnerStatus="info"
+                        nbSpinnerSize="giant">
+                    <mcq-tab-view (onCancel)="onCancel()" (onSubmit)="onSubmit($event)"
+                                  [isLoading]="isLoading"></mcq-tab-view>
+                </nb-tab>
+                <nb-tab [tabId]="'drawing'" tabTitle="DRAWING" [nbSpinner]="tabLoading" nbSpinnerStatus="info"
+                        nbSpinnerSize="giant">
+                    <drawing-tab-view (onCancel)="onCancel()" (onSubmit)="onSubmit($event)"
+                                      [isLoading]="isLoading"></drawing-tab-view>
+                </nb-tab>
+                <nb-tab [tabId]="'youtube'" tabTitle="YOUTUBE" [nbSpinner]="tabLoading" nbSpinnerStatus="info"
+                        nbSpinnerSize="giant">
+                    <youtube-tab-view (onCancel)="onCancel()" (onSubmit)="onSubmit($event)"
+                                      [isLoading]="isLoading"></youtube-tab-view>
+                </nb-tab>
+                <nb-tab [tabId]="'pdf'" tabTitle="PDF" [nbSpinner]="tabLoading" nbSpinnerStatus="info"
+                        nbSpinnerSize="giant">
+                    <pdf-tab-view (onCancel)="onCancel()" (onSubmit)="onSubmit($event)"
+                                  [isLoading]="isLoading"></pdf-tab-view>
+                </nb-tab>
+                <nb-tab [tabId]="'image'" tabTitle="Image" [nbSpinner]="tabLoading"
+                        nbSpinnerStatus="info"
+                        nbSpinnerSize="giant">
+                    <image-tab-view (onCancel)="onCancel()" (onSubmit)="onSubmit($event)"
+                                    [isLoading]="isLoading"></image-tab-view>
+                </nb-tab>
+                <nb-tab [tabId]="'presentation'" tabTitle="Google Slides/Docs" [nbSpinner]="tabLoading"
+                        nbSpinnerStatus="info"
+                        nbSpinnerSize="giant">
+                    <presentation-tab-view (onCancel)="onCancel()" (onSubmit)="onSubmit($event)"
+                                           [isLoading]="isLoading"></presentation-tab-view>
+                </nb-tab>
+                <nb-tab [tabId]="'scrom_object'" tabTitle="SCROM OBJECT/Links" [nbSpinner]="tabLoading"
+                        nbSpinnerStatus="info"
+                        nbSpinnerSize="giant">
+                    <scrom-obj-view (onCancel)="onCancel()" (onSubmit)="onSubmit($event)"
+                                    [isLoading]="isLoading"></scrom-obj-view>
+                </nb-tab>
+            </nb-tabset>
+        </nb-card-body>
+    </nb-card>
+</div>

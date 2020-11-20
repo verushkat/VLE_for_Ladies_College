@@ -1,0 +1,17 @@
+.canvas-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.publish_btn_container{
+    position: fixed;
+    bottom: 10vh;
+    right: 5vw;
+}
+
+.save-btn{
+    width: 200px !important;
+    height: 200px !important;
+    font-size: 4rem;
+}

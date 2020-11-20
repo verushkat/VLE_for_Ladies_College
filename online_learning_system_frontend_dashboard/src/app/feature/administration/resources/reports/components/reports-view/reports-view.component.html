@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="col-lg-12">
+        <nb-card>
+            <nb-card-header>Generate Reports</nb-card-header>
+            <nb-card-body>
+                <div class="col-lg-12">
+                    <label class="label">Select Resource</label>
+                    <nb-select (selectedChange)="onResourceChange($event)" class="select resource-select"
+                               [(selected)]="selectedResource" status="primary">
+                        <nb-option *ngFor="let resource of resources"
+                                   [value]="resource.value"> {{ resource.name }}</nb-option>
+                    </nb-select>
+                    <hr>
+                    <div class="validation-checkboxes">
+                        <nb-checkbox [(value)]="isFilteringEnabled">Enable Filtering</nb-checkbox>
+                        <nb-checkbox [(value)]="isSortingEnabled">Enable Sorting</nb-checkbox>
+                    </div>
+                </div>
+                <nb-accordion [multi]="true">
+                    <nb-accordion-item [hidden]="!isFilteringEnabled" [expanded]="isFilteringEnabled" #item>
+                        <nb-accordion-item-header>
+                            Filtering
+                        </nb-accordion-item-header>
+                        <nb-accordion-item-body>
+                            <form class="form-horizontal" [formGroup]="reportFormGroup">
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label for="select-filter" class="label form-control-label">Filter By</label>
+                                        <nb-select placeholder="Select" id="select-filter"
+                                                   class="select filter-by-select resource-select"
+                                                   [(selected)]="selectedFilterColumn" status="primary">
+                                            <nb-option *ngFor="let column of filteringColumns"
+                                                       [value]="column.value"> {{ column.name }}</nb-option>
+                                        </nb-select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input formControlName="value" type="text" nbInput fullWidth id="filterByValue"
+                                               placeholder="Value"
+                                               [class.status-danger]="isInvalidControl('value')">
+                                    </div>
+                                </div>
+                            </form>
+                        </nb-accordion-item-body>
+                    </nb-accordion-item>
+
+                    <nb-accordion-item [hidden]="!isSortingEnabled" [expanded]="isSortingEnabled">
+                        <nb-accordion-item-header>
+                            Sorting
+                        </nb-accordion-item-header>
+                        <nb-accordion-item-body>
+                            <form class="form-horizontal">
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label for="select-sorting" class="label form-control-label">Sort By</label>
+                                        <nb-select placeholder="Select" id="select-sorting"
+                                                   class="select sort-by-type-select"
+                                                   [(selected)]="selectedSortColumn" status="primary">
+                                            <nb-option *ngFor="let column of sortingColumns"
+                                                       [value]="column.value"> {{ column.name }}</nb-option>
+                                        </nb-select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="direction-select" class="label form-control-label">Direction</label>
+                                        <nb-select id="direction-select" class="select sort-by-dir-select"
+                                                   [(selected)]="selectedDirection" status="primary">
+                                            <nb-option *ngFor="let direction of directions"
+                                                       [value]="direction.value"> {{ direction.name }}</nb-option>
+                                        </nb-select>
+                                    </div>
+                                </div>
+                            </form>
+                        </nb-accordion-item-body>
+                    </nb-accordion-item>
+                </nb-accordion>
+                <div class="col-md-1">
+                    <button class="print-button" [disabled]="isGenerateDisabled()" nbButton status="success"
+                            size="medium"
+                            (click)="onGenerate()">
+                        Generate & Print
+                    </button>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

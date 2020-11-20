@@ -1,0 +1,120 @@
+<nb-card [hidden]="!!selectedStudentId">
+    <nb-card-header>Select a Student</nb-card-header>
+    <nb-card-body>
+        <ng-data-table
+                [id]="'students_list'"
+                [title]="'Students'"
+                [items]="studentData"
+                [showHeader]="true"
+                [pageable]="true"
+                [rowSelectable]="true"
+                [showRefreshButton]="true"
+                [selectOnRowClick]="true"
+                [showColumnSelector]="true"
+                [showSubstituteRows]="false"
+                (rowSelectChange)="onRowSelectChange($event)"
+                (init)="onStudentsTableInit($event)">
+            <ng-data-table-column
+                    [field]="'id'"
+                    [title]="'ID'"
+                    [width]="80"
+                    [visible]="false"
+                    [showInColumnSelector]="true">
+            </ng-data-table-column>
+            <ng-data-table-column
+                    [field]="'name'"
+                    [title]="'Name'"
+                    [width]="130"
+                    [filterable]="true"
+                    [showInColumnSelector]="false">
+            </ng-data-table-column>
+            <ng-data-table-column
+                    [field]="'grade'"
+                    [title]="'Grade'"
+                    [filterable]="true"
+                    [width]="100"
+                    [showInColumnSelector]="true">
+            </ng-data-table-column>
+        </ng-data-table>
+    </nb-card-body>
+</nb-card>
+
+<nb-card [hidden]="!selectedStudentId">
+    <nb-card-header>
+        Marks Table
+    </nb-card-header>
+    <nb-card-body>
+        <div class="form-group">
+            <div><span class="student-name-label">Student name: </span> {{selectedStudent?.name}}</div>
+        </div>
+        <div class="table-hint">Input marks here</div>
+        <div class="form-group row">
+            <form [formGroup]="marksForm">
+                <div class="col-lg-12">
+                    <div><label class="label">Subject</label></div>
+                    <nb-select class="subject-select" [(selected)]="selectedSubject" status="primary">
+                        <nb-option *ngFor="let subject of subjects"
+                                   [value]="subject.value"> {{ subject.name }}</nb-option>
+                    </nb-select>
+                    <input [formControlName]="'mark'"
+                           class="marksTxt"
+                           type="text" nbInput
+                           [fieldSize]="'medium'"
+                           shape="rectangle"
+                           placeholder="Marks"
+                           [class.status-danger]="isInvalidControl('mark')">
+                    <button [disabled]="!marksForm.valid" class="add-button" nbButton status="info" size="medium"
+                            (click)="onAdd()">
+                        Add
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <ng-data-table
+                [id]="'marks_list'"
+                [title]="'Marks'"
+                [items]="source"
+                [showHeader]="true"
+                [showRefreshButton]="true"
+                (init)="onMarksTableInit($event)">
+            <ng-data-table-column
+                    [field]="'subject'"
+                    [title]="'Subject'"
+                    [width]="80"
+                    [filterable]="true"
+                    [showInColumnSelector]="false">
+            </ng-data-table-column>
+            <ng-data-table-column
+                    [field]="'mark'"
+                    [title]="'Marks'"
+                    [width]="130"
+                    [filterable]="true"
+                    [showInColumnSelector]="false">
+            </ng-data-table-column>
+            <ng-data-table-column [width]="15" [showInColumnSelector]="false">
+                <ng-template #ngDataTableCell let-row="row" let-spanIndex="spanIndex" let-rowSpan="rowSpan">
+                    <td *ngIf="spanIndex === 0" [attr.rowspan]="rowSpan" (click)="$event.stopPropagation()">
+                        <nb-actions size="tiny">
+                            <nb-action style="text-align: center" icon="trash-2-outline"
+                                       (click)="onMarksDelete(row.item)"></nb-action>
+                        </nb-actions>
+                    </td>
+                </ng-template>
+            </ng-data-table-column>
+        </ng-data-table>
+        <label class="avg-marks-lbl">Average :</label><span class="avg-mark">{{average || '-'}}</span>
+        <div class="form-group row">
+            <div class="offset-sm-4 col-sm-6">
+                <button class="select-std-button" nbButton status="danger" size="medium"
+                        (click)="onGoBack()">
+                    Select student
+                </button>
+                <button class="generate-button" [disabled]="!source.length" nbButton status="success" size="medium"
+                        (click)="onGenerate()">
+                    Generate Report
+                </button>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

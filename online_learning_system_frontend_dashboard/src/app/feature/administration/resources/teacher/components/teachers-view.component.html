@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-lg-12">
+        <nb-card>
+            <nb-card-header>Teachers</nb-card-header>
+            <nb-card-body>
+                <div class="form-group">
+                    <div class="row col-md-6 col-sm-12">
+                        <div class="buttons-row">
+                            <button nbButton hero [size]="'small'" (click)="onAddButtonClick()">
+                                Add Teacher
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <ng-data-table
+                        [id]="'teachers_list'"
+                        [title]="'Teachers'"
+                        [dataSource]="dataSource"
+                        [showHeader]="true"
+                        [pageable]="true"
+                        [showRefreshButton]="true"
+                        [showLoadingSpinner]="true"
+                        (init)="onInit($event)">
+                    <ng-data-table-column
+                            [field]="'name'"
+                            [title]="'Name'"
+                            [filterable]="true"
+                            [width]="130">
+                    </ng-data-table-column>
+                    <ng-data-table-column
+                            [field]="'email'"
+                            [title]="'Email'"
+                            [filterable]="true"
+                            [width]="100">
+                    </ng-data-table-column>
+                    <ng-data-table-column
+                            [field]="'phone'"
+                            [title]="'Phone Number'"
+                            [filterable]="true"
+                            [width]="100">
+                    </ng-data-table-column>
+                    <ng-data-table-column
+                            [field]="'subject'"
+                            [title]="'Subject'"
+                            [filterable]="true"
+                            [showDropdownFilter]="true"
+                            [width]="100">
+                    </ng-data-table-column>
+                    <ng-data-table-column [width]="100">
+                        <ng-template #ngDataTableCell let-row="row" let-spanIndex="spanIndex" let-rowSpan="rowSpan">
+                            <td *ngIf="spanIndex === 0" [attr.rowspan]="rowSpan" (click)="$event.stopPropagation()">
+                                <nb-actions size="tiny">
+                                    <nb-action icon="edit-2-outline" (click)="onTeacherEdit(row.item.id)"></nb-action>
+                                    <nb-action icon="trash-2-outline"
+                                               (click)="onTeacherDelete(row.item)"></nb-action>
+                                </nb-actions>
+                            </td>
+                        </ng-template>
+                    </ng-data-table-column>
+                </ng-data-table>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="welcome-main-container">
+    <div class="welcome-inner-container">
+        <img src="assets/logo.png" class="logo-container">
+        <div class="header-container">
+            WELCOME TO OLS SMART-BOARD
+        </div>
+        <div [className]="pairingContainerStyle">
+            <div class="paring-header-container">
+                Paring Code
+            </div>
+
+            <div class="paring-code-container">
+                {{sessionId}}
+            </div>
+        </div>
+        <div [className]="paringLoadingContainer" >
+        </div>
+    </div>
+</div>

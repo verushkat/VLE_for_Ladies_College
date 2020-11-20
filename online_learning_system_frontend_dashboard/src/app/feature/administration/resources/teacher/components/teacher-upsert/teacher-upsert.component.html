@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-lg-12">
+        <form>
+            <div [formGroup]="teachersForm">
+                <nb-card>
+                    <nb-card-header *ngIf="!isEdit">Add New Teacher</nb-card-header>
+                    <nb-card-header *ngIf="isEdit">Edit Teacher Details</nb-card-header>
+                    <nb-card-body>
+                        <div class="form-group">
+                            <label for="name" class="label">Full Name</label><span class="required">*</span>
+                            <input id="name" type="text" formControlName="name" nbInput fullWidth
+                                   placeholder="Input Here">
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="label">Email address</label><span class="required">*</span>
+                            <input type="email" nbInput fullWidth formControlName="email" id="email"
+                                   placeholder="Input Here" [email]="true" [class.status-danger]="isInvalidControl('email')">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="label">Phone Number</label><span class="required">*</span>
+                            <span class="validation-error" [hidden]="!isInvalidDigitCount('phone')"> Phone number must contain 10 digits</span>
+                            <input type="string" nbInput fullWidth id="phone" formControlName="phone"
+                                   placeholder="Input Here" [class.status-danger]="isInvalidControl('phone')">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject" class="label">Subject</label><span class="required">*</span>
+                            <input type="text" nbInput fullWidth id="subject" formControlName="subject"
+                                   placeholder="Input Here">
+                        </div>
+                        <button [disabled]="!teachersForm.valid" type="submit" nbButton status="success" (click)="onSubmit()">Submit</button>
+                        <button nbButton status="danger" (click)="redirectToTeachersPage()">Cancel</button>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+        </form>
+    </div>
+</div>

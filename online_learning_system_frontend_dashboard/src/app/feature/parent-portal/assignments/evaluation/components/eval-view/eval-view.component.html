@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-lg-12">
+        <nb-card>
+            <nb-card-header>Student Evaluation</nb-card-header>
+            <nb-card-body>
+                <ng-data-table
+                        [id]="'eval_list'"
+                        [title]="'Evaluations'"
+                        [dataSource]="dataSource"
+                        [showHeader]="true"
+                        [pageable]="true"
+                        [showRefreshButton]="true"
+                        [showColumnSelector]="true">
+                    <ng-data-table-column
+                            [field]="'assignmentName'"
+                            [title]="'Assignment'"
+                            [filterable]="true"
+                            [width]="130"
+                            [showInColumnSelector]="false">
+                    </ng-data-table-column>
+                    <ng-data-table-column
+                            [field]="'submitedDate'"
+                            [title]="'Submitted Date'"
+                            [filterable]="true"
+                            [sortable]="true"
+                            [width]="100"
+                            [showInColumnSelector]="true">
+                    </ng-data-table-column>
+                    <ng-data-table-column
+                            [field]="'marks'"
+                            [title]="'Marks'"
+                            [filterable]="true"
+                            [sortable]="true"
+                            [width]="100"
+                            [showInColumnSelector]="true">
+                    </ng-data-table-column>
+                    <ng-data-table-column
+                            [field]="'evaluator'"
+                            [title]="'Evaluator'"
+                            [filterable]="true"
+                            [width]="100"
+                            [showInColumnSelector]="true">
+                    </ng-data-table-column>
+                    <ng-data-table-column [width]="100" [showInColumnSelector]="false">
+                        <ng-template #ngDataTableCell let-row="row" let-spanIndex="spanIndex" let-rowSpan="rowSpan">
+                            <td *ngIf="spanIndex === 0" [attr.rowspan]="rowSpan" (click)="$event.stopPropagation()">
+                                <swal
+                                    #imageViewer
+                                    title="Drawing"
+                                    [showCancelButton]="true"
+                                    [imageUrl]="row.item.drawing"
+                                    [imageWidth]="400"
+                                    [imageHeight]="200"
+                                    [showConfirmButton]="true">
+                                </swal>
+                                <button *ngIf="row.item.type === 'drawing'" nbButton hero [size]="'tiny'" [swal]="imageViewer">View Drawing</button>
+                            </td>
+                        </ng-template>
+                    </ng-data-table-column>
+                </ng-data-table>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

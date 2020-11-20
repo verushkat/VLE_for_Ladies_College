@@ -1,0 +1,16 @@
+<form [formGroup]="linkUploadForm">
+    <div class="form-group">
+        <label for="url" class="label">URL</label><span
+            class="required">*</span>
+        <input id="url" type="text" [formControlName]="'url'" nbInput
+               fullWidth
+               placeholder="Input url here">
+        <nb-checkbox [value]="isPreviewEnabled">Preview</nb-checkbox>
+    </div>
+    <iframe [hidden]="!isPreviewEnabled" width="600"
+            height="400"
+            [src]="linkUploadForm.get('url').value"
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+    </iframe>
+</form>

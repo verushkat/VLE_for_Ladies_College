@@ -1,0 +1,20 @@
+.mcq-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+}
+
+.info-container{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-left: 1vw;
+    height: 10vh;
+    background-color: lightgrey;
+}
+
+.info-inner-container{
+    margin-right: 2vw;
+    font-size: 1.3rem;
+}

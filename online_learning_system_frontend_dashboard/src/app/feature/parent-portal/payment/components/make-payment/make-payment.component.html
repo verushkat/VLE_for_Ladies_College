@@ -1,0 +1,75 @@
+<div class="row">
+    <div class="col-lg-12">
+        <nb-card>
+            <nb-card-header>Make Payment</nb-card-header>
+            <nb-card-body>
+                <loading-overlay [hidden]="!isLoading"></loading-overlay>
+                <div class="container mt-5" [hidden]="isPayClicked">
+                    <div *ngIf="!isPaid">
+                        According to your section, {{paymentAmount}}/= is your pending payment for this month.
+                    </div>
+                    <div *ngIf="isPaid">
+                        Great! No remaining payments for this month.
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                            <button [hidden]="isPaid" (click)="onPayNowClick()" class="btn btn-primary btn-block pay-now-btn">Pay now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <form [formGroup]="paymentFormGroup" class="payment" [hidden]="!isPayClicked" autocomplete="on">
+                    <div class="panel panel-default credit-card-box">
+                        <div class="panel-heading display-table">
+                            <div class="row display-tr">
+                                <h3 class="panel-title display-td">Payment Details</h3>
+                            </div>
+                            <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
+                        </div>
+                    </div>
+                    <br>
+                    <span class="pay-amount-info">* Remaining payment amount is {{paymentAmount}} LKR</span>
+                    <div class="form-group">
+                        <label class="lbl" for="cardNumber">CARD NUMBER</label><span class="required">*</span>
+                        <input id="cardNumber" type="text" size="10" class="form-control" name="cardNumber"
+                               [formControlName]="'cardNumber'"
+                               placeholder="Valid Card Number" autocomplete="cc-number" autofocus
+                               [class.is-invalid]="isInvalidControl('cardNumber')"/>
+                        <span class="validation-error" [hidden]="!isInvalidControl('cardNumber')"> Card number must contain 16 digits</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="input-group-addon"><i style="padding-right: 5px"
+                                                           class="fa fa-credit-card"></i></span>
+                        <label class="lbl" for="cardExpir">EXPIRATION DATE</label><span class="required">*</span>
+                        <input id="cardExpir" type="text" size="5" class="form-control" name="cardExpiry"
+                               [formControlName]="'expDate'"
+                               placeholder="MM / YY" autocomplete="cc-exp"
+                               [class.is-invalid]="isInvalidControl('expDate')"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="lbl" for="cardCVC">CVV CODE</label><span class="required">*</span>
+                        <input id="cardCVC" type="text" size="3" class="form-control" name="cardCVC" placeholder="CVV"
+                               [formControlName]="'cvCode'"
+                               autocomplete="cc-csc" [class.is-invalid]="isInvalidControl('cvCode')"/>
+                        <span class="validation-error" [hidden]="!isInvalidControl('cvCode')"> CVV code must contain 3 digits</span>
+                    </div>
+                    <div class="form-group" [hidden]="true">
+                        <label class="lbl" for="amount">Amount</label><span class="required">*</span>
+                        <input id="amount" type="text" [value]="paymentAmount" class="form-control" name="amount" placeholder="Amount"
+                               [formControlName]="'amount'" [class.is-invalid]="isInvalidControl('amount')"/>
+                        <span class="validation-error" [hidden]="!isInvalidControl('amount')">Invalid amount</span>
+                    </div>
+                    <br>
+                    <div class="btn-group" role="group">
+                        <button (click)="onPayClick()" [disabled]="!paymentFormGroup.valid"
+                                class="btn btn-success btn-block pay-btn">Pay
+                        </button>
+                        <button (click)="onCancelClick()" class="btn btn-danger btn-block cancel-btn">Cancel</button>
+                    </div>
+                    <br><br>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
